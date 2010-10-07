@@ -1,12 +1,6 @@
 
 require File.join(File.dirname(__FILE__), 'spec_helper.rb')
 
-class Invoice
-  include Volute
-
-  volute :paid
-end
-
 describe Volute do
 
   before(:each) do
