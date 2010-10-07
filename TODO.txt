@@ -5,6 +5,7 @@
 [ ] volute { over }
 [ ] volute Module { ... }
 [ ] obj.volute_do_set(:a => 0, :b => 1)
+[ ] volute /regex/ => /regex/ { ... }
 
 [ ] volute do
       volute Invoice do

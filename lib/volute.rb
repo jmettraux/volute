@@ -144,12 +144,14 @@ module Volute
 
       opts = args.last.is_a?(Hash) ? args.pop : {}
 
-      opts.each do |k, v|
-        return false unless value == v
-        return false unless k.to_s == attribute || k == previous_value
-      end
+      return true if opts.empty?
 
-      true
+      opts.inject(false) do |b, (k, v)|
+        b || (
+          (k == :any || k == previous_value) &&
+          (v == :any || v == value)
+        )
+      end
 
     #rescue Exception => e
     #  p e
