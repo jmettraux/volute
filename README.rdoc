@@ -8,6 +8,11 @@ It can be used to implement toy state machines, or dumb rule systems.
 See examples/ and specs/
 
 
+== usage
+
+  gem install volute
+
+
 == example : equation
 
   # license is MIT

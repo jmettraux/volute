@@ -20,3 +20,5 @@
       end
     end
 
+[ ] multi-entity state machine example
+
