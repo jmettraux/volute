@@ -56,6 +56,27 @@ describe 'a volute' do
   end
 end
 
+describe 'a class without a volute' do
+
+  before(:each) do
+
+    Volute.clear!
+
+    @invoice = Invoice.new
+  end
+
+  it 'should get as usual' do
+
+    @invoice.paid.should == nil
+  end
+
+  it 'should set as usual' do
+
+    (@invoice.paid = false).should == false
+    @invoice.paid.should == false
+  end
+end
+
 describe 'a volute for a class' do
 
   before(:each) do
@@ -72,9 +93,11 @@ describe 'a volute for a class' do
     end
   end
 
-  it 'should flip burgers' do
+  it 'should not affect other classes' do
 
-    true.should == false
+    @invoice.paid = true
+    @invoice.comment.should == [ 'paid', nil, true ]
+    @item.comment.should == nil
   end
 end
 
