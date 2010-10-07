@@ -33,3 +33,16 @@ class Delivery
   o_attr_accessor :comment
 end
 
+module Financing
+  class Loan
+    include Volute
+    attr_accessor :price
+    o_attr_accessor :comment
+  end
+  class Grant
+    include Volute
+    attr_accessor :price
+    o_attr_accessor :comment
+  end
+end
+

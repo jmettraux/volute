@@ -133,6 +133,9 @@ module Volute
     def match? (args)
 
       classes = args.select { |a| a.is_a?(Class) }
+      args.select { |a| a.is_a?(Module) }.each { |m|
+        classes.concat(m.constants.collect { |c| m.const_get(c) })
+      }
       if classes.size > 0 && (classes & object.class.ancestors).empty?
         return false
       end
