@@ -26,7 +26,7 @@ class Equation
 end
 
 #
-# a volute triggered for any 'set' operation on an attribute of book
+# a volute per attribute
 
 volute Equation do
 
