@@ -1,7 +1,7 @@
 
 = volute
 
-It could be a 'set event bus', or a 'business logic relocator'.
+It could be a 'set event bus', 'on set callback helper' or a 'business logic relocator'.
 
 It can be used to implement toy state machines, or dumb rule systems.
 
@@ -108,16 +108,14 @@ See examples/ and specs/
 
   volute Book do
 
-    # object.volute_do_set(:state, x)
+    # object.vset(:state, x)
     #   is equivalent to
     # object.instance_variable_set(:@state, x)
 
     if object.stock <= 0
-      object.volute_do_set(
-        :state, object.discontinued ? :discontinued : :out_of_stock)
+      object.vset(:state, object.discontinued ? :discontinued : :out_of_stock)
     else
-      object.volute_do_set(
-        :state, :in_stock)
+      object.vset(:state, :in_stock)
     end
   end
 

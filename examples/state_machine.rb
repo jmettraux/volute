@@ -31,16 +31,14 @@ end
 
 volute Book do
 
-  # object.volute_do_set(:state, x)
+  # object.vset(:state, x)
   #   is equivalent to
   # object.instance_variable_set(:@state, x)
 
   if object.stock <= 0
-    object.volute_do_set(
-      :state, object.discontinued ? :discontinued : :out_of_stock)
+    object.vset(:state, object.discontinued ? :discontinued : :out_of_stock)
   else
-    object.volute_do_set(
-      :state, :in_stock)
+    object.vset(:state, :in_stock)
   end
 end
 
