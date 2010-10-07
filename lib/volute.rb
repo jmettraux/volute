@@ -122,15 +122,12 @@ module Volute
       @over = true
     end
 
-    def is(val)
-
-      val == value
-    end
-
-    def was(val)
-
-      val == previous_value
-    end
+    #def is(val)
+    #  val == value
+    #end
+    #def was(val)
+    #  val == previous_value
+    #end
 
     protected
 
