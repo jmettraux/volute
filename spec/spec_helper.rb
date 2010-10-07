@@ -7,13 +7,13 @@ class Invoice
   include Volute
 
   attr_accessor :paid
-  attr_accessor :comment
+  o_attr_accessor :comment
 end
 
 class Item
   include Volute
 
   attr_accessor :delivered
-  attr_accessor :comment
+  o_attr_accessor :comment
 end
 

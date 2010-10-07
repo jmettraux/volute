@@ -24,7 +24,7 @@ describe 'a volute' do
 
     volute do
       volute do
-        object.volute_do_set(:comment, [ key, previous_value, value ])
+        object.comment = [ key, previous_value, value ]
       end
     end
   end
@@ -67,7 +67,7 @@ describe 'a volute for a class' do
 
     volute do
       volute Invoice do
-        object.volute_do_set(:comment, [ key, previous_value, value ])
+        object.comment = [ key, previous_value, value ]
       end
     end
   end

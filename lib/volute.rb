@@ -31,6 +31,10 @@ module Volute
 
   def self.included(target)
 
+    target.instance_eval do
+      alias o_attr_accessor attr_accessor
+    end
+
     def target.attr_accessor(*args)
 
       args.each do |arg|
