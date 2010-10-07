@@ -69,7 +69,7 @@ Rake::RDocTask.new do |rd|
   rd.title = "volute #{Volute::VOLUTE_VERSION}"
 
   rd.rdoc_files.include(
-    'README.rdoc', 'CHANGELOG.txt', 'lib/**/*.rb')
+    'README.rdoc', 'CHANGELOG.txt', 'LICENSE.txt', 'lib/**/*.rb')
 end
 
 
