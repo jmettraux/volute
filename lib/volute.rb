@@ -25,7 +25,6 @@
 module Volute
 
   VOLUTE_VERSION = '0.1.0'
-  VOLUTE_DEPTH = 217
 
   #
   # adding class methods to target classes
@@ -51,24 +50,15 @@ module Volute
 
   def volute_set(key, value)
 
-    volutes << [ key, volute_get(key) ]
-    while volutes.length > VOLUTE_DEPTH
-      volutes.shift
-    end
+    previous_value = volute_get(key)
     instance_variable_set("@#{key}", value)
-  end
-
-  def volutes
-
-    (Volute.volutes[object_id] ||= [])
+    Volute.handle(self, key, previous_value, value)
   end
 
   #
   # Volute class methods
 
-  def self.volutes
-
-    @volutes ||= {}
+  def self.handle(instance, key, previous_value, new_value)
   end
 end
 
