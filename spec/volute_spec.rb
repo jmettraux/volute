@@ -23,9 +23,7 @@ describe 'a volute' do
     @invoice = Invoice.new
 
     volute do
-      volute do
-        object.comment = [ attribute, previous_value, value ]
-      end
+      object.comment = [ attribute, previous_value, value ]
     end
   end
 
@@ -86,10 +84,8 @@ describe 'a volute for a class' do
     @invoice = Invoice.new
     @item = Item.new
 
-    volute do
-      volute Invoice do
-        object.comment = [ attribute, previous_value, value ]
-      end
+    volute Invoice do
+      object.comment = [ attribute, previous_value, value ]
     end
   end
 
@@ -118,10 +114,8 @@ describe 'a volute for two classes' do
     @invoice = Invoice.new
     @item = Item.new
 
-    volute do
-      volute Invoice, Item do
-        object.comment = [ attribute, previous_value, value ]
-      end
+    volute Invoice, Item do
+      object.comment = [ attribute, previous_value, value ]
     end
   end
 
@@ -147,10 +141,8 @@ describe 'a volute for an attribute' do
     @item = Item.new
     @package = Package.new
 
-    volute do
-      volute :delivered do
-        object.comment = [ object.class, attribute, previous_value, value ]
-      end
+    volute :delivered do
+      object.comment = [ object.class, attribute, previous_value, value ]
     end
   end
 

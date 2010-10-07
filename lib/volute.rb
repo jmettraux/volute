@@ -81,11 +81,11 @@ module Volute
     (@top = [])
   end
 
-  def self.root_eval(object, key, previous_value, value)
+  def self.root_eval(object, attribute, previous_value, value)
 
-    (@top || []).each do |block|
-      Target.new(object, key, previous_value, value).instance_eval(&block)
-    end
+    target = Target.new(object, attribute, previous_value, value)
+
+    (@top || []).each { |args, block| target.volute(*args, &block) }
   end
 
   #
@@ -160,8 +160,8 @@ module Volute
   end
 end
 
-def volute(&block)
+def volute(*args, &block)
 
-  Volute << block
+  Volute << [ args, block ]
 end
 
