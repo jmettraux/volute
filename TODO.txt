@@ -1,5 +1,21 @@
 
-[ ] volute 'prev' => 'new { ... }
+[o] volute 'prev' => 'new' { ... }
+
 [ ] volute /^att/ { ... }
 [ ] volute { over }
+[ ] volute Module { ... }
+[ ] obj.volute_do_set(:a => 0, :b => 1)
+
+[ ] volute do
+      volute Invoice do
+        volute :paid do
+    
+          if is(true)
+            object.comment = 'got paid'
+          elsif was(nil)
+            object.comment = 'still not paid'
+          end
+        end
+      end
+    end
 

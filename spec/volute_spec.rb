@@ -1,18 +1,6 @@
 
 require File.join(File.dirname(__FILE__), 'spec_helper.rb')
 
-#volute do
-#  volute Invoice do
-#    volute :paid do
-#
-#      if is(true)
-#        object.comment = 'got paid'
-#      elsif was(nil)
-#        object.comment = 'still not paid'
-#      end
-#    end
-#  end
-#end
 
 describe 'a volute' do
 
@@ -158,6 +146,56 @@ describe 'a volute for an attribute' do
     @package.delivered = true
 
     @package.comment.should == [ Package, 'delivered', nil, true ]
+  end
+end
+
+describe 'transition volutes' do
+
+  before(:each) do
+
+    Volute.clear!
+
+    @package = Package.new
+    @package.volute_do_set(:location, 'NRT')
+
+    volute :location => 'SFO' do
+      object.comment = 'reached SFO'
+    end
+    volute :location, 'NRT' => 'SFO' do
+      object.comment = 'reached SFO from NRT'
+    end
+    volute 'NRT' => 'FCO' do
+      object.comment = 'reached FCO from NRT'
+    end
+  end
+
+  it 'should not trigger when not specified' do
+
+    @package.location = 'ZRH'
+
+    @package.comment.should == nil
+  end
+
+  it 'should trigger for an end state' do
+
+    @package.volute_do_set(:location, 'ZRH')
+    @package.location = 'SFO'
+
+    @package.comment.should == 'reached SFO'
+  end
+
+  it 'should trigger for an attribute, a start state and an end state' do
+
+    @package.location = 'SFO'
+
+    @package.comment.should == 'reached SFO from NRT'
+  end
+
+  it 'should trigger for a start state and an end state' do
+
+    @package.location = 'FCO'
+
+    @package.comment.should == 'reached FCO from NRT'
   end
 end
 

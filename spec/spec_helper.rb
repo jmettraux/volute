@@ -20,6 +20,7 @@ end
 class Package
   include Volute
 
+  attr_accessor :location
   attr_accessor :delivered
   o_attr_accessor :comment
 end

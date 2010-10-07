@@ -132,15 +132,6 @@ module Volute
 
     def match? (args)
 
-      opts = args.last.is_a?(Hash) ? args.pop : {}
-
-      if from = opts.delete(:from)
-        return false if previous_value != from
-      end
-      if to = opts.delete(:to)
-        return false if value != from
-      end
-
       classes = args.select { |a| a.is_a?(Class) }
       if classes.size > 0 && (classes & object.class.ancestors).empty?
         return false
@@ -149,6 +140,13 @@ module Volute
       atts = args.select { |a| a.is_a?(Symbol) }
       if atts.size > 0 && ( ! atts.include?(attribute.to_sym))
         return false
+      end
+
+      opts = args.last.is_a?(Hash) ? args.pop : {}
+
+      opts.each do |k, v|
+        return false unless value == v
+        return false unless k.to_s == attribute || k == previous_value
       end
 
       true
