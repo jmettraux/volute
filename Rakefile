@@ -43,7 +43,7 @@ placing some [business] logic outside of classes
   gem.authors = [ 'John Mettraux' ]
   gem.rubyforge_project = 'rufus'
 
-  gem.test_file = 'test/test.rb'
+  #gem.test_file = 'test/test.rb'
 
   #gem.add_dependency 'mime-types', '>= 1.16'
   gem.add_development_dependency 'rake'
