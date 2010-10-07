@@ -17,3 +17,18 @@ class Item
   o_attr_accessor :comment
 end
 
+class Package
+  include Volute
+
+  attr_accessor :delivered
+  o_attr_accessor :comment
+end
+
+class Delivery
+  include Volute
+
+  attr_accessor :scheduled
+  attr_accessor :performed
+  o_attr_accessor :comment
+end
+

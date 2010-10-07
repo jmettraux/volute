@@ -147,7 +147,7 @@ module Volute
       end
 
       atts = args.select { |a| a.is_a?(Symbol) }
-      if atts.size > 0 && atts.include?(attribute.to_sym)
+      if atts.size > 0 && ( ! atts.include?(attribute.to_sym))
         return false
       end
 

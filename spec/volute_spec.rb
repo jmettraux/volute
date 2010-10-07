@@ -138,3 +138,34 @@ describe 'a volute for two classes' do
   end
 end
 
+describe 'a volute for an attribute' do
+
+  before(:each) do
+
+    Volute.clear!
+
+    @item = Item.new
+    @package = Package.new
+
+    volute do
+      volute :delivered do
+        object.comment = [ object.class, attribute, previous_value, value ]
+      end
+    end
+  end
+
+  it 'should affect class A' do
+
+    @item.delivered = true
+
+    @item.comment.should == [ Item, 'delivered', nil, true ]
+  end
+
+  it 'should affect class B' do
+
+    @package.delivered = true
+
+    @package.comment.should == [ Package, 'delivered', nil, true ]
+  end
+end
+
