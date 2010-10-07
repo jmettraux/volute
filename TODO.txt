@@ -2,9 +2,9 @@
 [o] volute 'prev' => 'new' { ... }
 [o] volute Module { ... }
 [o] obj.volute_do_set(:a => 0, :b => 1)
+[o] volute { over }
 
 [ ] volute /^att/ { ... }
-[ ] volute { over }
 [ ] volute /regex/ => /regex/ { ... }
 
 [ ] volute do
