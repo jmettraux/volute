@@ -1,0 +1,9 @@
+
+= volute
+
+placing business logic outside of classes
+
+== license
+
+MIT
+
