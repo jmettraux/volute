@@ -93,12 +93,12 @@ module Volute
 
   class Target
 
-    attr_reader :object, :key, :previous_value, :value
+    attr_reader :object, :attribute, :previous_value, :value
 
-    def initialize(object, key, previous_value, value)
+    def initialize(object, attribute, previous_value, value)
 
       @object = object
-      @key = key
+      @attribute = attribute
       @previous_value = previous_value
       @value = value
 
@@ -134,23 +134,28 @@ module Volute
 
       opts = args.last.is_a?(Hash) ? args.pop : {}
 
-      if from = opts[:from]
+      if from = opts.delete(:from)
         return false if previous_value != from
       end
-      if to = opts[:to]
+      if to = opts.delete(:to)
         return false if value != from
       end
 
-      args.each do |a|
-        if a.is_a?(Class) && ( ! object.class.ancestors.include?(a))
-          return false
-        end
-        if a.is_a?(Symbol) && a.to_s != key
-          return false
-        end
+      classes = args.select { |a| a.is_a?(Class) }
+      if classes.size > 0 && (classes & object.class.ancestors).empty?
+        return false
+      end
+
+      atts = args.select { |a| a.is_a?(Symbol) }
+      if atts.size > 0 && atts.include?(attribute.to_sym)
+        return false
       end
 
       true
+
+    #rescue Exception => e
+    #  p e
+    #  e.backtrace.each { |l| p l }
     end
   end
 end

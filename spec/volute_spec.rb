@@ -24,7 +24,7 @@ describe 'a volute' do
 
     volute do
       volute do
-        object.comment = [ key, previous_value, value ]
+        object.comment = [ attribute, previous_value, value ]
       end
     end
   end
@@ -88,16 +88,53 @@ describe 'a volute for a class' do
 
     volute do
       volute Invoice do
-        object.comment = [ key, previous_value, value ]
+        object.comment = [ attribute, previous_value, value ]
       end
     end
+  end
+
+  it 'should affect its class' do
+
+    @invoice.paid = true
+
+    @invoice.comment.should == [ 'paid', nil, true ]
   end
 
   it 'should not affect other classes' do
 
     @invoice.paid = true
-    @invoice.comment.should == [ 'paid', nil, true ]
+
     @item.comment.should == nil
+  end
+end
+
+
+describe 'a volute for two classes' do
+
+  before(:each) do
+
+    Volute.clear!
+
+    @invoice = Invoice.new
+    @item = Item.new
+
+    volute do
+      volute Invoice, Item do
+        object.comment = [ attribute, previous_value, value ]
+      end
+    end
+  end
+
+  it 'should affect class A' do
+
+    @invoice.paid = true
+    @invoice.comment.should == [ 'paid', nil, true ]
+  end
+
+  it 'should affect class B' do
+
+    @item.delivered = true
+    @item.comment.should == [ 'delivered', nil, true ]
   end
 end
 
