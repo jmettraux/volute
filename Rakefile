@@ -1,4 +1,6 @@
 
+$:.unshift('.') # ruby 1.9.2
+
 require 'lib/volute.rb'
 
 require 'rubygems'
