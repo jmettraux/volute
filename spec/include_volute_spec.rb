@@ -26,7 +26,7 @@ describe Volute do
 
     it 'should allow setting in batch' do
 
-      @package.volute_do_set(:location => 'ZRH', :delivered => false)
+      @package.vset(:location => 'ZRH', :delivered => false)
 
       @package.location.should == 'ZRH'
       @package.delivered.should == false

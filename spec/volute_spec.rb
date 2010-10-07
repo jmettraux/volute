@@ -23,9 +23,9 @@ describe 'a volute' do
     @invoice.comment.should == nil
   end
 
-  it 'should not be applied when #volute_do_set is used' do
+  it 'should not be applied when #vset is used' do
 
-    @invoice.volute_do_set(:paid, true)
+    @invoice.vset(:paid, true)
 
     @invoice.comment.should == nil
   end

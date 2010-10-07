@@ -47,7 +47,7 @@ module Volute
   #
   # instance methods added to target classes
 
-  def volute_do_set(key, value=nil)
+  def vset(key, value=nil)
 
     if key.is_a?(Hash)
       key.each { |k, v| instance_variable_set("@#{k}", v) }
@@ -64,7 +64,7 @@ module Volute
   def volute_set(key, value)
 
     previous_value = volute_get(key)
-    volute_do_set(key, value)
+    vset(key, value)
     Volute.root_eval(self, key, previous_value, value)
 
     value

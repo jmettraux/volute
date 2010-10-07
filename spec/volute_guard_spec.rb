@@ -133,7 +133,7 @@ describe 'transition volutes' do
     Volute.clear!
 
     @package = Package.new
-    @package.volute_do_set(:location, 'NRT')
+    @package.vset(:location, 'NRT')
 
     volute :location, :any => 'SFO' do
       object.comment = 'reached SFO'
@@ -158,7 +158,7 @@ describe 'transition volutes' do
 
   it 'should trigger for an end state' do
 
-    @package.volute_do_set(:location, 'ZRH')
+    @package.vset(:location, 'ZRH')
     @package.location = 'SFO'
 
     @package.comment.should == 'reached SFO'
@@ -180,7 +180,7 @@ describe 'transition volutes' do
 
   it 'should trigger for a start state' do
 
-    @package.volute_do_set(:location, 'GVA')
+    @package.vset(:location, 'GVA')
     @package.location = 'CAL'
 
     @package.comment.should == 'left GVA'
