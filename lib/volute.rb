@@ -53,6 +53,7 @@ module Volute
     previous_value = volute_get(key)
     instance_variable_set("@#{key}", value)
     Volute.handle(self, key, previous_value, value)
+    value
   end
 
   #

@@ -9,11 +9,11 @@ end
 
 describe Volute do
 
-  describe 'when included' do
+  before(:each) do
+    @invoice = Invoice.new
+  end
 
-    before(:each) do
-      @invoice = Invoice.new
-    end
+  describe 'when included' do
 
     it 'should grant getters' do
       @invoice.paid.should == nil
@@ -22,6 +22,13 @@ describe Volute do
     it 'should grants setters' do
       @invoice.paid = true
       @invoice.paid.should == true
+    end
+  end
+
+  describe 'setters' do
+
+    it 'should return the new value' do
+      (@invoice.paid = false).should == false
     end
   end
 end
