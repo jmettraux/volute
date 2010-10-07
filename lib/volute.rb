@@ -47,9 +47,13 @@ module Volute
   #
   # instance methods added to target classes
 
-  def volute_do_set(key, value)
+  def volute_do_set(key, value=nil)
 
-    instance_variable_set("@#{key}", value)
+    if key.is_a?(Hash)
+      key.each { |k, v| instance_variable_set("@#{k}", v) }
+    else
+      instance_variable_set("@#{key}", value)
+    end
   end
 
   def volute_get(key)
