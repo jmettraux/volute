@@ -227,3 +227,28 @@ describe 'transition volutes' do
   end
 end
 
+describe 'a volute for a class' do
+
+  before(:each) do
+
+    Volute.clear!
+
+    @item = Item.new
+    @heavy_item = HeavyItem.new
+
+    volute Item do
+      (object.comment ||= []) << 'regular'
+    end
+    volute HeavyItem do
+      (object.comment ||= []) << 'heavy'
+    end
+  end
+
+  it 'should trigger for a child class' do
+
+    @heavy_item.delivered = true
+
+    @heavy_item.comment.should == [ 'regular', 'heavy' ]
+  end
+end
+

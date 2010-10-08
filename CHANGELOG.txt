@@ -4,6 +4,7 @@
 
 == volute - 0.1.1    not yet released
 
+- volutes(arg) for querying the top-level volutes
 - enforced guard listing <=> OR and volute nesting <=> AND
 
 

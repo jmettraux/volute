@@ -23,3 +23,7 @@
 [-] volute Class { volute :attr { } } --> Class AND attr
     volute Class, :attr { } --> Class OR attr
 
+[ ] volutes
+    `-- volute x, y
+      `-- volute a, b
+

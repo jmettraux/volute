@@ -18,6 +18,9 @@ class Item
   o_attr_accessor :comment
 end
 
+class HeavyItem < Item
+end
+
 class Package
   include Volute
 

@@ -76,23 +76,28 @@ module Volute
   #
   # Volute class methods
 
-  def self.<<(block)
+  def self.register(args, block)
 
-    (@top ||= []) << block
+    top << [ args, block ]
   end
 
   # Nukes all the top level volutes.
   #
   def self.clear!
 
-    (@top = [])
+    @top = []
   end
 
   def self.root_eval(object, attribute, previous_value, value)
 
     target = Target.new(object, attribute, previous_value, value)
 
-    (@top || []).each { |args, block| target.volute(*args, &block) }
+    top.each { |args, block| target.volute(*args, &block) }
+  end
+
+  def self.top
+
+    (@top ||= [])
   end
 
   #
@@ -161,10 +166,39 @@ module Volute
   end
 end
 
-# Top level volute call
+# Registers a 'volute' at the top level (ie a volute not nested into another)
 #
 def volute(*args, &block)
 
-  Volute << [ args, block ]
+  Volute.register(args, block)
+end
+
+# With no arguments, it will list all the top-level volutes.
+#
+def volutes(arg=nil)
+
+  return Volute.top unless arg
+
+  Volute.top.select { |args, block|
+
+    classes = args.select { |a| a.is_a?(Class) }
+
+    if args.include?(arg)
+      true
+    elsif arg.is_a?(Class)
+      (arg.ancestors & classes).size > 0
+    elsif arg.is_a?(Module)
+      (arg.constants.collect { |c| arg.const_get(c) } & classes).size > 0
+    #elsif arg.is_a?(Symbol)
+      # already handled by the initial if
+    else
+      false
+    end
+  }
+end
+
+# TODO
+#
+def volutes= (volutes)
 end
 
