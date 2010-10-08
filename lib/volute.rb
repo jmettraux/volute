@@ -85,7 +85,7 @@ module Volute
   #
   def self.clear!
 
-    @top = []
+    @top = nil
   end
 
   def self.root_eval(object, attribute, previous_value, value)
@@ -97,11 +97,41 @@ module Volute
 
   def self.top
 
-    (@top ||= [])
+    (@top ||= VoluteArray.new)
   end
 
   #
   # some classes
+
+  class VoluteArray < Array
+
+    def filter(arg)
+
+      select { |args, block|
+
+        classes = args.select { |a| a.is_a?(Class) }
+
+        if args.include?(arg)
+          true
+        elsif arg.is_a?(Class)
+          (arg.ancestors & classes).size > 0
+        elsif arg.is_a?(Module)
+          (arg.constants.collect { |c| arg.const_get(c) } & classes).size > 0
+        #elsif arg.is_a?(Symbol)
+          # already handled by the initial if
+        else
+          false
+        end
+      }
+    end
+
+    def remove(arg)
+
+      filtered = filter(arg)
+
+      reject! { |volute| filtered.include?(volute) }
+    end
+  end
 
   class Target
 
@@ -177,23 +207,6 @@ end
 #
 def volutes(arg=nil)
 
-  return Volute.top unless arg
-
-  Volute.top.select { |args, block|
-
-    classes = args.select { |a| a.is_a?(Class) }
-
-    if args.include?(arg)
-      true
-    elsif arg.is_a?(Class)
-      (arg.ancestors & classes).size > 0
-    elsif arg.is_a?(Module)
-      (arg.constants.collect { |c| arg.const_get(c) } & classes).size > 0
-    #elsif arg.is_a?(Symbol)
-      # already handled by the initial if
-    else
-      false
-    end
-  }
+  arg ? Volute.top.filter(arg) : Volute.top
 end
 

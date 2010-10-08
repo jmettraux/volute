@@ -42,6 +42,13 @@ describe 'volutes' do
     volutes.size.should == 3
   end
 
+  it 'should be removable' do
+
+    volutes.remove(Financing)
+
+    volutes.size.should == 3
+  end
+
   describe 'with a class argument' do
 
     it 'should list only the top-level volutes for that class' do
