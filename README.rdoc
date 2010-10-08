@@ -1,7 +1,7 @@
 
 = volute
 
-It could be a 'set event bus', 'on set callback helper' or a 'business logic relocator'.
+It could be a 'set event bus', 'on_set callback system' or a 'business logic relocator'.
 
 It can be used to implement toy state machines, or dumb rule systems.
 
@@ -82,7 +82,18 @@ would output :
 
 == examples
 
-  http://github.com/jmettraux/volute/tree/master/examples/
+http://github.com/jmettraux/volute/tree/master/examples/
+
+
+== author
+
+John Mettraux - http://github.com/jmettraux/
+
+
+== feedback
+
+* IRC freenode #ruote
+* jmettraux@gmail.com
 
 
 == license

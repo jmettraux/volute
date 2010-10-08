@@ -25,6 +25,7 @@ placing some [business] logic outside of classes
      "Rakefile",
      "TODO.txt",
      "examples/equation.rb",
+     "examples/light.rb",
      "examples/state_machine.rb",
      "examples/traffic.rb",
      "lib/volute.rb",
@@ -32,6 +33,7 @@ placing some [business] logic outside of classes
      "spec/spec_helper.rb",
      "spec/volute_guard_spec.rb",
      "spec/volute_spec.rb",
+     "spec/volutes_spec.rb",
      "volute.gemspec"
   ]
   s.homepage = %q{http://github.com/jmettraux/volute/}
@@ -45,7 +47,9 @@ placing some [business] logic outside of classes
      "spec/spec_helper.rb",
      "spec/volute_guard_spec.rb",
      "spec/volute_spec.rb",
+     "spec/volutes_spec.rb",
      "examples/equation.rb",
+     "examples/light.rb",
      "examples/state_machine.rb",
      "examples/traffic.rb"
   ]
