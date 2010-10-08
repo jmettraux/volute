@@ -24,7 +24,7 @@
 
 module Volute
 
-  VOLUTE_VERSION = '0.1.0'
+  VOLUTE_VERSION = '0.1.1'
 
   #
   # adding class methods to target classes

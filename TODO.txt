@@ -20,3 +20,6 @@
 [x] multi-entity state machine example
     not happy with the traffic light example
 
+[-] volute Class { volute :attr { } } --> Class AND attr
+    volute Class, :attr { } --> Class OR attr
+
