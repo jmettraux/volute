@@ -5,132 +5,84 @@ It could be a 'set event bus', 'on set callback helper' or a 'business logic rel
 
 It can be used to implement toy state machines, or dumb rule systems.
 
-See examples/ and specs/
 
+== include Volute
 
-== usage
+When the Volute mixin is included in a class, its attr_accessor call is modified so that the resulting attributer set method, upon setting the value of the attribute triggers a callback defined outside of the class.
 
-  gem install volute
+  require 'rubygems'
+  require 'volute' # gem install volute
 
-
-== example : equation
-
-  # license is MIT
-
-  $:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-
-  require 'volute'
-
-  #
-  # our class
-
-  class Equation
+  class Light
     include Volute
 
-    attr_accessor :km, :h, :kph
-
-    def initialize
-      @km = 1.0
-      @h = 1.0
-      @kph = 1.0
-    end
-
-    def inspect
-      "#{@km} km, #{@h} h, #{@kph} kph"
-    end
+    attr_accessor :colour
+    attr_accessor :changed_at
   end
 
-  #
-  # a volute per attribute
-
-  volute Equation do
-
-    # object.vset(:state, x)
-    #   is equivalent to
-    # object.instance_variable_set(:@state, x)
-
-    volute :km do
-      object.vset(:h, value / object.kph)
-    end
-    volute :h do
-      object.vset(:kph, object.km / value)
-    end
-    volute :kph do
-      object.vset(:h, object.km / value)
-    end
+  volute :colour do
+    object.changed_at = Time.now
   end
 
-  #
-  # trying
+  l = Light.new
+  p l # => #<Light:0x10014c480>
 
-  e = Equation.new
-  p e # => 1.0 km, 1.0 h, 1.0 kph
+  l.colour = :blue
+  p l # => #<Light:0x10014c480 @changed_at=Fri Oct 08 20:01:52 +0900 2010, @colour=:blue>
 
-  e.kph = 10.0
-  p e # => 1.0 km, 0.1 h, 10.0 kph
+There is a catch in this example, the volute will trigger for any class that inccludes Volute and which sees a change to its :colour attribute.
 
-  e.km = 5.0
-  p e # => 5.0 km, 0.5 h, 10.0 kph
+Those two classes would see their :colour hooked :
 
-
-== example : some kind of state-machine
-
-  # license is MIT
-  #
-  # a state-machine-ish example, inspired by the example at
-  # http://github.com/qoobaa/transitions
-
-  $:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-
-  require 'volute'
-
-  #
-  # our class
-
-  class Book
+  class Light
     include Volute
 
-    attr_accessor :stock
-    attr_accessor :discontinued
+    attr_accessor :colour
+    attr_accessor :changed_at
+  end
 
-    attr_reader :state
+  class Flower
+    include Volute
 
-    def initialize (stock)
-      @stock = stock
-      @discontinued = false
-      @state = :in_stock
+    attr_accessor :colour
+  end
+
+To make sure that only instance of Light will be concerned, one could write :
+
+  volute Light do
+    volute :colour do
+      object.changed_at = Time.now
     end
   end
 
-  #
-  # a volute triggered for any 'set' operation on an attribute of book
+Inside of a volute, these are the available 'variables' :
 
-  volute Book do
+* object - the instance whose attribute has been set
+* attribute - the attribute name whose value has been set
+* previous_value - the previous value for the attribute
+* value - the new value
 
-    # object.vset(:state, x)
-    #   is equivalent to
-    # object.instance_variable_set(:@state, x)
+thus :
 
-    if object.stock <= 0
-      object.vset(:state, object.discontinued ? :discontinued : :out_of_stock)
-    else
-      object.vset(:state, :in_stock)
+  volute Light do
+    volute :colour do
+      puts "#{object.class}.#{attribute} : #{previous_value.inspect} --> #{value.inspect}"
     end
   end
 
-  #
-  # trying
+  l = Light.new
+  l.colour = :blue
+  l.colour = :red
 
-  emma = Book.new(10)
+would output :
 
-  emma.stock = 2
-  p emma.state # => :in_stock
+  Light.colour : nil --> :blue
+  Light.colour : :blue --> :red
 
-  emma.stock = 0
-  p emma.state # => :out_of_stock
 
-  emma.discontinued = true
-  p emma.state # => :discontinued
+== examples
+
+  http://github.com/jmettraux/volute/tree/master/examples/
 
 
 == license
