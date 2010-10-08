@@ -1,24 +1,22 @@
 
 [o] volute 'prev' => 'new' { ... }
 [o] volute Module { ... }
-[o] obj.volute_do_set(:a => 0, :b => 1)
+[o] obj.vset(:a => 0, :b => 1)
 [o] volute { over }
 
 [ ] volute /^att/ { ... }
 [ ] volute /regex/ => /regex/ { ... }
 
-[ ] volute do
-      volute Invoice do
-        volute :paid do
-    
-          if is(true)
-            object.comment = 'got paid'
-          elsif was(nil)
-            object.comment = 'still not paid'
-          end
+[ ] volute Invoice do
+      volute :paid do
+        if is(true)
+          object.comment = 'got paid'
+        elsif was(nil)
+          object.comment = 'still not paid'
         end
       end
     end
 
-[ ] multi-entity state machine example
+[x] multi-entity state machine example
+    not happy with the traffic light example
 
