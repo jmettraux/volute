@@ -126,6 +126,42 @@ describe 'a volute for an attribute' do
   end
 end
 
+describe 'a volute for a class or an attribute' do
+
+  before(:each) do
+
+    Volute.clear!
+
+    @item = Item.new
+    @package = Package.new
+
+    volute Item, :delivered do
+      object.comment = 'Item, :delivered'
+    end
+  end
+
+  it 'should not trigger inappropriately' do
+
+    @package.location = 'Baden Baden'
+
+    @package.comment.should == nil
+  end
+
+  it 'should trigger for the class' do
+
+    @item.weight = :heavy
+
+    @item.comment.should == 'Item, :delivered'
+  end
+
+  it 'should trigger for the attribute' do
+
+    @package.delivered = true
+
+    @package.comment.should == 'Item, :delivered'
+  end
+end
+
 describe 'transition volutes' do
 
   before(:each) do
@@ -135,11 +171,15 @@ describe 'transition volutes' do
     @package = Package.new
     @package.vset(:location, 'NRT')
 
-    volute :location, :any => 'SFO' do
-      object.comment = 'reached SFO'
+    volute :location do
+      volute :any => 'SFO' do
+        object.comment = 'reached SFO'
+      end
     end
-    volute :location, 'NRT' => 'SFO' do
-      object.comment = 'reached SFO from NRT'
+    volute :location do
+      volute  'NRT' => 'SFO' do
+        object.comment = 'reached SFO from NRT'
+      end
     end
     volute 'NRT' => 'FCO' do
       object.comment = 'reached FCO from NRT'

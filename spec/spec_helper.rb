@@ -13,6 +13,7 @@ end
 class Item
   include Volute
 
+  attr_accessor :weight
   attr_accessor :delivered
   o_attr_accessor :comment
 end

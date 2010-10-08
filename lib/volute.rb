@@ -22,6 +22,9 @@
 # Made in Japan.
 #++
 
+
+# TODO : insert lengthy explanation here
+#
 module Volute
 
   VOLUTE_VERSION = '0.1.1'
@@ -133,37 +136,33 @@ module Volute
 
     def match? (args)
 
+      return true if args.empty?
+
       classes = args.select { |a| a.is_a?(Class) }
       args.select { |a| a.is_a?(Module) }.each { |m|
         classes.concat(m.constants.collect { |c| m.const_get(c) })
       }
-      if classes.size > 0 && (classes & object.class.ancestors).empty?
-        return false
-      end
+      return true if (classes & object.class.ancestors).size > 0
 
       atts = args.select { |a| a.is_a?(Symbol) }
-      if atts.size > 0 && ( ! atts.include?(attribute.to_sym))
-        return false
-      end
+      return true if atts.include?(attribute.to_sym)
 
       opts = args.last.is_a?(Hash) ? args.pop : {}
 
-      return true if opts.empty?
-
-      opts.inject(false) do |b, (k, v)|
-        b || (
+      opts.each do |k, v|
+        return true if (
           (k == :any || k == previous_value) &&
           (v == :any || v == value)
         )
       end
 
-    #rescue Exception => e
-    #  p e
-    #  e.backtrace.each { |l| p l }
+      false
     end
   end
 end
 
+# Top level volute call
+#
 def volute(*args, &block)
 
   Volute << [ args, block ]
