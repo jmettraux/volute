@@ -80,6 +80,63 @@ would output :
   Light.colour : :blue --> :red
 
 
+== selector / guards
+
+A volute combines a list of arguments with a block of ruby code
+
+  volute do
+    puts 'some attribute was set'
+  end
+
+  volute Light do
+    puts 'some attribute of an instance of class Light was set'
+  end
+
+  volute Light, Flower do
+    puts 'some attribute of an instance of class Light or Flower was set'
+  end
+
+  volute :count do
+    puts 'the attribute :count of some instance got set'
+  end
+
+  volute :count, :number do
+    puts 'the attribute :count or :number of some instance got set'
+  end
+
+  volute Light, :count do
+    puts 'some attribute of an instance of class Light was set'
+    puts 'OR'
+    puts 'the attribute :count of some instance got set'
+  end
+
+As soon as 1 argument matches, the Ruby block of the volute is executed. In other words, arg0 OR arg1 OR ... OR argN
+
+If you need for an AND, read on to "nesting volutes".
+
+  volute 0 => 100 do
+    puts "some attribute went from 0 to 100"
+  end
+
+  volute :any => 100 do
+    puts "some attribute was just set to 100"
+  end
+
+  volute 0 => :any do
+    puts "some attribute was at 0 and just got changed"
+  end
+
+
+== nesting volutes
+
+TODO
+
+
+== 'over'
+
+TODO
+
+
 == examples
 
 http://github.com/jmettraux/volute/tree/master/examples/
