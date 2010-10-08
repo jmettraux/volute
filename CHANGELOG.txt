@@ -2,5 +2,12 @@
 = volute - CHANGELOG.txt
 
 
-== volute - 0.1.0    not yet released
+== volute - 0.1.1    not yet released
+
+- enforced guard listing <=> OR and volute nesting <=> AND
+
+
+== volute - 0.1.0    released 2010/10/07
+
+- initial release
 

@@ -36,7 +36,6 @@ See examples/ and specs/
     end
 
     def inspect
-
       "#{@km} km, #{@h} h, #{@kph} kph"
     end
   end
