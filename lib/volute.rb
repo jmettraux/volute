@@ -187,6 +187,9 @@ module Volute
       atts = args.select { |a| a.is_a?(Symbol) }
       return true if atts.include?(attribute.to_sym)
 
+      atts = args.select { |a| a.is_a?(Regexp) }
+      return true if atts.find { |r| r.match(attribute.to_s) }
+
       opts = args.last.is_a?(Hash) ? args.pop : {}
 
       opts.each do |k, v|

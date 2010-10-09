@@ -252,3 +252,31 @@ describe 'a volute for a class' do
   end
 end
 
+describe 'a volute with a regex arg' do
+
+  before(:each) do
+
+    Volute.clear!
+
+    @invoice = Invoice.new
+
+    volute /^customer_/ do
+      object.comment = 'set on customer_ attribute called'
+    end
+  end
+
+  it 'should not trigger for attributes whose name doesn\'t match' do
+
+    @invoice.paid = true
+
+    @invoice.comment.should == nil
+  end
+
+  it 'should trigger for attributes whose name matches' do
+
+    @invoice.customer_name = 'tojo'
+
+    @invoice.comment.should == 'set on customer_ attribute called'
+  end
+end
+

@@ -4,6 +4,8 @@
 
 == volute - 0.1.1    not yet released
 
+- volutes /regex_on_attribute_name/ { ... }
+- volutes :not, args { ... }
 - volutes.remove(Financing) for removing top-level volutes
 - volutes(arg) for querying the top-level volutes
 - enforced guard listing <=> OR and volute nesting <=> AND

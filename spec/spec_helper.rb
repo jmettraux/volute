@@ -7,6 +7,8 @@ class Invoice
   include Volute
 
   attr_accessor :paid
+  attr_accessor :customer_name
+  attr_accessor :customer_id
   o_attr_accessor :comment
 end
 

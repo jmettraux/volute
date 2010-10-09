@@ -6,8 +6,8 @@
 [o] volute Class { volute :attr { } } --> Class AND attr
     volute Class, :attr { } --> Class OR attr
 [o] volute :not, Light { ... }
+[o] volute /^att/ { ... }
 
-[ ] volute /^att/ { ... }
 [ ] volute /regex/ => /regex/ { ... }
 
 [ ] volute Invoice do
@@ -26,4 +26,6 @@
 [ ] volutes
     `-- volute x, y
       `-- volute a, b
+
+[ ] pass the object as block binding ?
 
