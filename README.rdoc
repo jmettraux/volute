@@ -178,9 +178,26 @@ Whereas enumerating arguments for a single volute played like an OR, to achieve 
   end
 
 
-== 'over'
+== 'guarding' inside of the volute block
 
 TODO
+
+
+== 'over'
+
+Each volute that matches sees its block called. In order to prevent further evaluations, the 'over' method can be called.
+
+  volute Package do
+
+    volute do
+      over if object.delivered
+        # prevent further volute evaluation if the package was delivered
+    end
+
+    volute :location do
+      (object.comment ||= []) << value
+    end
+  end
 
 
 == volute management
