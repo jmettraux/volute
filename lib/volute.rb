@@ -171,7 +171,7 @@ module Volute
 
     def match?(args)
 
-      args.first == :not ? not(do_match?(args[1..-1])) : do_match?(args)
+      args.first == :not ? ( ! do_match?(args[1..-1])) : do_match?(args)
     end
 
     def do_match?(args)
