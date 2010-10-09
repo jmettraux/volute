@@ -80,7 +80,7 @@ would output :
   Light.colour : :blue --> :red
 
 
-== selectors / guards
+== filters / guards
 
 A volute combines a list of arguments with a block of ruby code
 
