@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["John Mettraux"]
-  s.date = %q{2010-10-08}
+  s.date = %q{2010-10-09}
   s.description = %q{
 placing some [business] logic outside of classes
   }
@@ -29,9 +29,10 @@ placing some [business] logic outside of classes
      "examples/state_machine.rb",
      "examples/traffic.rb",
      "lib/volute.rb",
+     "spec/guard_spec.rb",
      "spec/include_volute_spec.rb",
+     "spec/over_spec.rb",
      "spec/spec_helper.rb",
-     "spec/volute_guard_spec.rb",
      "spec/volute_spec.rb",
      "spec/volutes_spec.rb",
      "volute.gemspec"
@@ -43,9 +44,10 @@ placing some [business] logic outside of classes
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{placing some [business] logic outside of classes}
   s.test_files = [
-    "spec/include_volute_spec.rb",
+    "spec/guard_spec.rb",
+     "spec/include_volute_spec.rb",
+     "spec/over_spec.rb",
      "spec/spec_helper.rb",
-     "spec/volute_guard_spec.rb",
      "spec/volute_spec.rb",
      "spec/volutes_spec.rb",
      "examples/equation.rb",

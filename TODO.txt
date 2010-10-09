@@ -3,6 +3,9 @@
 [o] volute Module { ... }
 [o] obj.vset(:a => 0, :b => 1)
 [o] volute { over }
+[o] volute Class { volute :attr { } } --> Class AND attr
+    volute Class, :attr { } --> Class OR attr
+[o] volute :not, Light { ... }
 
 [ ] volute /^att/ { ... }
 [ ] volute /regex/ => /regex/ { ... }
@@ -19,9 +22,6 @@
 
 [x] multi-entity state machine example
     not happy with the traffic light example
-
-[-] volute Class { volute :attr { } } --> Class AND attr
-    volute Class, :attr { } --> Class OR attr
 
 [ ] volutes
     `-- volute x, y

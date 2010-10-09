@@ -80,7 +80,7 @@ would output :
   Light.colour : :blue --> :red
 
 
-== selector / guards
+== selectors / guards
 
 A volute combines a list of arguments with a block of ruby code
 
@@ -127,12 +127,48 @@ If you need for an AND, read on to "nesting volutes".
   end
 
 
+== volute :not
+
+A volute may have :not has a first argument
+
+  volute :not, Invoice do
+    puts "some instance that is not an invoice..."
+  end
+
+  volute :not, :any => :delivered do
+    puts "a transition to something different than :delivered..."
+  end
+
+  volute :not, Invoice, :paid do
+    puts "not an Invoice and not a variation of the :paid attribute..."
+  end
+
+Not Bob or Charlie, Nor Bob and neither Charlie.
+
+
 == nesting volutes
+
+Whereas enumerating arguments for a single volute played like an OR, to achieve AND, one can nest volutes.
+
+  volute Invoice do
+    volute :paid do
+      puts "the :paid attribute of an Invoice just changed"
+    end
+  end
+
+  volute Grant do
+    volute :paid do
+      puts "the :paid attribute of a Grant just changed"
+    end
+  end
+
+
+== 'over'
 
 TODO
 
 
-== 'over'
+== volute management
 
 TODO
 

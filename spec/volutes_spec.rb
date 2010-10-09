@@ -20,6 +20,8 @@ describe 'volutes' do
     end
     volute :delivered do
     end
+    volute :not, Financing do
+    end
   end
 
   it 'should return an empty array when there are no volutes' do
@@ -31,7 +33,7 @@ describe 'volutes' do
 
   it 'should list volutes' do
 
-    volutes.size.should == 6
+    volutes.size.should == 7
   end
 
   it 'should be updatable' do
@@ -61,7 +63,7 @@ describe 'volutes' do
 
     it 'should list only the top-level volutes for classes of that module' do
 
-      volutes(Financing).size.should == 3
+      volutes(Financing).size.should == 4
     end
   end
 
@@ -70,6 +72,19 @@ describe 'volutes' do
     it 'should list only the top-level volutes for that argument' do
 
       volutes(:delivered).size.should == 1
+    end
+  end
+
+  describe 'with a :not as first arg' do
+
+    it 'should simply ignore the :not' do
+
+      volutes(Financing).size.should == 4
+    end
+
+    it 'should list :not volutes' do
+
+      volutes(:not).size.should == 1
     end
   end
 end
