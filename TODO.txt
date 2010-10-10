@@ -30,3 +30,7 @@
 
 [ ] pass the object as block binding ?
 
+[ ] volute :att => /regex/ { ... }
+[ ] volute :att => :any { ... } (not a nil value)
+[ ] volute :att => [ a, b ] { ... } (a or b)
+

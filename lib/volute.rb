@@ -209,11 +209,13 @@ module Volute
 
       return true if args.empty?
 
+      return state_match?(args) if is_a_state_match?(args)
+
       classes = args.select { |a| a.is_a?(Class) }
       args.select { |a| a.is_a?(Module) }.each { |m|
         classes.concat(m.constants.collect { |c| m.const_get(c) })
       }
-      return true if (classes & object.class.ancestors).size > 0
+      return true if (classes & @object.class.ancestors).size > 0
 
       atts = args.select { |a| a.is_a?(Symbol) }
       return true if atts.include?(attribute.to_sym)
@@ -231,6 +233,42 @@ module Volute
       end
 
       false
+    end
+
+    def has_attribute?(att)
+
+      return false if att == :any
+
+      #m = @object.method(att) rescue nil
+      #return false unless m
+      #return false if m.arity != -1
+        # arity would be -1 on ruby 1.8.7 and 0 on ruby 1.9.1, ...
+
+      begin
+        @object.send(att)
+        true
+      rescue NoMethodError => nme
+        false
+      end
+    end
+
+    def is_a_state_match?(args)
+
+      state = args.first
+
+      return false if args.length != 1
+      return false unless state.is_a?(Hash)
+      return false if state.keys.find { |arg| ! arg.is_a?(Symbol) }
+      return false if state.keys.find { |att| ! has_attribute?(att) }
+      true
+    end
+
+    def state_match?(args)
+
+      args.first.each do |att, val|
+        return false if @object.send(att) != val
+      end
+      true
     end
   end
 end

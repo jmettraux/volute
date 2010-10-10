@@ -180,7 +180,61 @@ Whereas enumerating arguments for a single volute played like an OR, to achieve 
 
 == 'guarding' inside of the volute block
 
-TODO
+As long as one doesn't use a 'return' inside of a block, they're just ruby code...
+
+  volute Patient do
+    if object.sore_throat == true && object.fever == true
+      puts "needs further investigation"
+    elsif object.fever == true
+      puts "only a small fever"
+    end
+  end
+
+
+== 'state volutes'
+
+"I want this volute to trigger when the patient has a sore_throat and the flu", would translate to
+
+  volute Patient do
+    volute :sore_throat do
+      if value == true && object.fever == true
+        puts "it triggers"
+      end
+    end
+    volute :fever do
+      if value == true && object.sore_throat == true
+        puts "it triggers"
+      end
+    end
+  end
+
+hairy isn't it ? There is a simpler way, it constitutes an exception to the "volute arguments join in an OR", but it reads well (I hope) :
+
+  volute Patient do
+    volute :sore_throat => true, :fever => true do
+      puts "it triggers"
+    end
+  end
+
+:not applies as well :
+
+  volute Patient do
+    volute :not, :leg_broken do
+      send_patient_back_home # we only treat broken legs
+    end
+  end
+
+Our sore_throat and flu example could be rewritten with Ruby ifs as :
+
+  volute Patient do
+    if object.sore_throat == true && object.flu == true
+      puts "it triggers"
+    end
+  end
+
+which isn't hairy at all.
+
+There is an example that uses those 'state volutes' at http://github.com/jmettraux/volute/blob/master/examples/diagnosis.rb
 
 
 == 'over'
@@ -229,9 +283,14 @@ The key here is the call to
 
   Volute.apply(object, attribute=nil, previous_value=nil, value=nil)
 
-In fact, for classes that include Volute, this is method called for each attribute getting set.
+In fact, for classes that include Volute, this method is called for each attribute getting set.
 
 This technique is also a key when building system where the volutes aren't called all the time but only right before their result should matter ('decision' versus 'reaction').
+
+
+== volute blocks, closures
+
+TODO
 
 
 == volute management

@@ -4,6 +4,7 @@
 
 == volute - 0.1.1    not yet released
 
+- 'state' volutes
 - Volute.apply(object, attribute=nil, previous_value=nil, value=nil)
 - volutes /regex_on_attribute_name/ { ... }
 - volutes :not, args { ... }
