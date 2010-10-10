@@ -103,6 +103,15 @@ module Volute
   #
   # some classes
 
+  # Subclassing Array to add a #filter and a #remove method, so that
+  # things like
+  #
+  #   all_the_volutes = volutes
+  #   volutes_about_class_x = volutes(x)
+  #
+  #   volutes.remove(x)
+  #     # just removed all the volutes referring class or attribute x
+  #
   class VoluteArray < Array
 
     def filter(arg)

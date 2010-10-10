@@ -11,7 +11,7 @@ require 'rake'
 # SPEC
 
 task :spec do
-  sh "spec -cfs spec/"
+  sh 'time spec -cfs spec/'
 end
 
 task :default => :spec
