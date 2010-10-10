@@ -68,7 +68,7 @@ module Volute
 
     previous_value = volute_get(key)
     vset(key, value)
-    Volute.root_eval(self, key, previous_value, value)
+    Volute.apply(self, key, previous_value, value)
 
     value
   end
@@ -88,7 +88,7 @@ module Volute
     @top = nil
   end
 
-  def self.root_eval(object, attribute, previous_value, value)
+  def self.apply(object, attribute, previous_value, value)
 
     target = Target.new(object, attribute, previous_value, value)
 
