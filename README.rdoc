@@ -200,6 +200,40 @@ Each volute that matches sees its block called. In order to prevent further eval
   end
 
 
+== application of the volutes on demand
+
+Up until now, this readme focused on the scenario where volute application is triggered by a change in the state of an attribute (in a class that includes Volute).
+
+It is entirely OK to have classes that do not include Volute but are the object of a volute application :
+
+  class Engine
+    attr_accessor :state
+    def turn_key!
+      @key_turned = true
+      Volute.apply(self, :key_turned)
+    end
+    def press_red_button!
+      Volute.apply(self)
+    end
+  end
+
+  volute Engine do
+    if attribute == :key_turned
+      object.state = :running
+    else
+      object.state = :off
+    end
+  end
+
+The key here is the call to
+
+  Volute.apply(object, attribute=nil, previous_value=nil, value=nil)
+
+In fact, for classes that include Volute, this is method called for each attribute getting set.
+
+This technique is also a key when building system where the volutes aren't called all the time but only right before their result should matter ('decision' versus 'reaction').
+
+
 == volute management
 
 TODO

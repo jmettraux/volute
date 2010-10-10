@@ -88,7 +88,29 @@ module Volute
     @top = nil
   end
 
-  def self.apply(object, attribute, previous_value, value)
+  # Volute.apply is generally called from the setter of a class which include
+  # Volute, but it's OK to call it directly, to force volute application.
+  #
+  #   class Engine
+  #     attr_accessor :state
+  #     def turn_key!
+  #       @key_turned = true
+  #       Volute.apply(self, :key_turned)
+  #     end
+  #     def press_red_button!
+  #       Volute.apply(self)
+  #     end
+  #   end
+  #
+  #   volute Engine do
+  #     if attribute == :key_turned
+  #       object.state = :running
+  #     else
+  #       object.state = :off
+  #     end
+  #   end
+  #
+  def self.apply(object, attribute=nil, previous_value=nil, value=nil)
 
     target = Target.new(object, attribute, previous_value, value)
 
