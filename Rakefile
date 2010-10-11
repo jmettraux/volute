@@ -10,11 +10,11 @@ require 'rake'
 #
 # SPEC
 
-task :spec do
-  sh 'time spec -cfs spec/'
+task :rspec do
+  sh 'time rspec -cfs spec/'
 end
 
-task :default => :spec
+task :default => :rspec
 
 
 #
@@ -47,7 +47,7 @@ placing some [business] logic outside of classes
 
   #gem.add_dependency 'mime-types', '>= 1.16'
   gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rspec', '>= 2.0.0'
   gem.add_development_dependency 'jeweler'
 
   # gemspec spec : http://www.rubygems.org/read/chapter/20
