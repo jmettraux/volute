@@ -17,8 +17,13 @@ require 'volute'
 class Patient
 
   attr_reader :name
-  attr_reader :symptoms
+
+  attr_accessor :fever
+  attr_accessor :rash
+  attr_accessor :spots
+  attr_accessor :sore_throat
   attr_accessor :innoculated
+
   attr_accessor :diagnosis
 
   def initialize(name)
@@ -33,15 +38,6 @@ class Patient
     Volute.apply(self)
 
     @diagnosis
-  end
-
-  def method_missing (m, *args)
-
-    if args.length == 0
-      @symptoms[m.to_sym]
-    else
-      super
-    end
   end
 end
 
@@ -74,13 +70,13 @@ volute Patient do
 end
 
 pat = Patient.new('alice')
-pat.symptoms[:rash] = true
+pat.rash = true
 
 puts "#{pat.name} : diagnosed with #{pat.diagnose!}"
 
 pat = Patient.new('bob')
-pat.symptoms[:sore_throat] = true
-pat.symptoms[:fever] = :high
+pat.sore_throat = true
+pat.fever = :high
 
 puts "#{pat.name} : diagnosed with #{pat.diagnose!}"
 
