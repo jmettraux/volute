@@ -255,6 +255,22 @@ Pointing to multiple values is OK :
     end
   end
 
+Not mentioning an attribute implies its value doesn't matter when matching state, :any and :not_nil could prove useful though :
+
+  volute Package do
+    volute :delivered => :not_nil do
+      puts "package entered delivery circuit"
+    end
+  end
+
+  volute Item do
+    volute :weight => :any, :package => true do
+      # dropping ":weight => :any" would make sense, but sometimes, when
+      # tweaking volutes, a quick editing of :any to another value is
+      # almost effortless
+    end
+  end
+
 There is an example that uses those 'state volutes' at http://github.com/jmettraux/volute/blob/master/examples/diagnosis.rb
 
 

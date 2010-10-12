@@ -9,8 +9,6 @@
 [o] volute /^att/ { ... }
 [o] not including Volute, but triggering Volute.xxx on some changes
 
-[ ] volute /regex/ => /regex/ { ... }
-
 [ ] volute Invoice do
       volute :paid do
         if is(true)
@@ -30,11 +28,12 @@
 
 [ ] pass the object as block binding ?
 
-[ ] volute :att => /regex/ { ... }
-[ ] volute :att => :any { ... } (not a nil value)
+[o] volute :att => :not_nil { ... } (not a nil value)
 [o] volute :att => [ a, b ] { ... } (a or b)
 [o] volute previous_value => [ val0, val1 ] { ... } (OR)
 [o] volute [ pval0, pval1 ] => value { ... } (OR)
+[ ] volute :att => /regex/ { ... }
+[ ] volute /regex/ => /regex/ { ... }
 
 [ ] readme : list alternatives (aspects/hooks/callbacks)
 

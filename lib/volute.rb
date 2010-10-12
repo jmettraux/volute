@@ -253,7 +253,11 @@ module Volute
 
       args.first.each do |att, val|
         cval = @object.send(att)
-        if val.is_a?(Array)
+        if val == :any
+          # let pass
+        elsif val == :not_nil
+          return false if cval == nil
+        elsif val.is_a?(Array)
           return false if cval != val && ( ! val.include?(cval))
         else
           return false if cval != val
