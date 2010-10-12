@@ -191,13 +191,6 @@ module Volute
       @over = true
     end
 
-    #def is(val)
-    #  val == value
-    #end
-    #def was(val)
-    #  val == previous_value
-    #end
-
     protected
 
     def match?(args)
@@ -223,14 +216,7 @@ module Volute
       atts = args.select { |a| a.is_a?(Regexp) }
       return true if atts.find { |r| r.match(attribute.to_s) }
 
-      opts = args.last.is_a?(Hash) ? args.pop : {}
-
-      opts.each do |k, v|
-        return true if (
-          (k == :any || k == previous_value) &&
-          (v == :any || v == value)
-        )
-      end
+      return transition_match?(args.last) if args.last.is_a?(Hash)
 
       false
     end
@@ -269,6 +255,22 @@ module Volute
         return false if @object.send(att) != val
       end
       true
+    end
+
+    def kv_match?(item, val)
+
+      return true if item == :any
+      return true if item.is_a?(Array) && item.include?(val)
+      #return item.include?(val) if item.is_a?(Array)
+      (item == val)
+    end
+
+    def transition_match?(hash)
+
+      hash.each do |key, val|
+        return true if kv_match?(key, previous_value) && kv_match?(val, value)
+      end
+      false
     end
   end
 end

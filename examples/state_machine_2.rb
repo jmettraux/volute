@@ -38,9 +38,11 @@ volute Bookshop do
     # anything in the module Bookshop that has an attribute :stock
     # or :discontinued
 
-    if object.stock <= 0
+    volute :any => [ 0, true ] do
       object.state = object.discontinued ? :discontinued : :out_of_stock
-    else
+      over
+    end
+    volute do
       object.state = :in_stock
     end
   end

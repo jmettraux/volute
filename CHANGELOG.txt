@@ -4,6 +4,8 @@
 
 == volute - 0.1.1    not yet released
 
+- volute [ 'prev0', 'prev1' ] => 'current' { ... }
+- volute 'prev' => [ 'current0', 'current1' ] { ... }
 - 'state' volutes
 - Volute.apply(object, attribute=nil, previous_value=nil, value=nil)
 - volutes /regex_on_attribute_name/ { ... }

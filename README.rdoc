@@ -114,6 +114,22 @@ As soon as 1 argument matches, the Ruby block of the volute is executed. In othe
 
 If you need for an AND, read on to "nesting volutes".
 
+Filtering on attributes who match a regular expression :
+
+  class Invoice
+    include Volute
+
+    attr_accessor :amount
+    attr_accessor :customer_name, :customer_id
+  end
+
+  volute /^customer_/ do
+    puts "attribute :customer_name or :customer_id got modified"
+  end
+
+
+== 'transition volutes'
+
 It's possible to filter based on the previous value and the new value (with :any as a wildcard) :
 
   volute 0 => 100 do
@@ -128,17 +144,14 @@ It's possible to filter based on the previous value and the new value (with :any
     puts "some attribute was at 0 and just got changed"
   end
 
-Filtering on attributes who match a regular expression :
+Multiple start and end values may be specified :
 
-  class Invoice
-    include Volute
-
-    attr_accessor :amount
-    attr_accessor :customer_name, :customer_id
+  volute [ 'FRA', 'ZRH' ] => :any do
+    puts "left FRA or ZRH"
   end
 
-  volute /^customer_/ do
-    puts "attribute :customer_name or :customer_id got modified"
+  volute 'GVA' => [ 'SHA', 'NRT' ] do
+    puts "reached SHA or NRT from GVA"
   end
 
 
