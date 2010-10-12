@@ -4,6 +4,7 @@
 
 == volute - 0.1.1    not yet released
 
+- volute :att => /regex/ and volute /regex/ => /regex/
 - volute :attribute => :any / :not_nil { ... }
 - volute :attribute => [ 'val0', 'val1'] { ... }
 - volute [ 'prev0', 'prev1' ] => 'current' { ... }

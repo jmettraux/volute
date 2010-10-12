@@ -154,6 +154,12 @@ Multiple start and end values may be specified :
     puts "reached SHA or NRT from GVA"
   end
 
+Regular expressions are OK :
+
+  volute /^S..$/ => /^F..$/ do
+    puts "left S.. and reached F.."
+  end
+
 
 == volute :not
 
@@ -269,6 +275,12 @@ Not mentioning an attribute implies its value doesn't matter when matching state
       # tweaking volutes, a quick editing of :any to another value is
       # almost effortless
     end
+  end
+
+For attributes whose values are strings, regular expressions may prove useful :
+
+  volute :location => /^Fort .+/ do
+    puts "Somewhere in Fort ..."
   end
 
 There is an example that uses those 'state volutes' at http://github.com/jmettraux/volute/blob/master/examples/diagnosis.rb

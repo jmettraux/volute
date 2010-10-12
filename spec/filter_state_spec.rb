@@ -148,5 +148,32 @@ describe "a 'state' volute" do
     it 'should trigger even if delivered is set' do
     end
   end
+
+  describe 'with :attribute => /regex/' do
+
+    before(:each) do
+
+      @p0 = Package.new
+      @p1 = Package.new
+      @p2 = Package.new
+
+      Volute.clear!
+
+      volute :location => /^Fort .+$/ do
+        object.comment = 'located in some fort'
+      end
+    end
+
+    it 'should match appropriately' do
+
+      @p0.location = 'Fort Alamo'
+      @p1.location = 'Fort Worth'
+      @p2.location = 'Fortalezza'
+
+      @p0.comment.should == 'located in some fort'
+      @p1.comment.should == 'located in some fort'
+      @p2.comment.should == nil
+    end
+  end
 end
 

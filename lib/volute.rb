@@ -181,7 +181,9 @@ module Volute
     def volute(*args, &block)
 
       return if @over
-      return unless match?(args)
+
+      match = (args.first == :not) ? ( ! match?(args[1..-1])) : match?(args)
+      return unless match
 
       self.instance_eval(&block)
     end
@@ -194,11 +196,6 @@ module Volute
     protected
 
     def match?(args)
-
-      args.first == :not ? ( ! do_match?(args[1..-1])) : do_match?(args)
-    end
-
-    def do_match?(args)
 
       return true if args.empty?
 
@@ -249,35 +246,36 @@ module Volute
       true
     end
 
+    def val_match?(target, current, in_array=false)
+
+      return true if target == current
+      return true if target == :any
+      return current != nil if target == :not_nil
+
+      if target.is_a?(Regexp) && current.is_a?(String)
+        return target.match(current)
+      end
+      if in_array == false && target.is_a?(Array)
+        return target.find { |t| val_match?(t, current, true) }
+      end
+
+      false
+    end
+
     def state_match?(args)
 
-      args.first.each do |att, val|
-        cval = @object.send(att)
-        if val == :any
-          # let pass
-        elsif val == :not_nil
-          return false if cval == nil
-        elsif val.is_a?(Array)
-          return false if cval != val && ( ! val.include?(cval))
-        else
-          return false if cval != val
-        end
+      args.first.each do |att, target_val|
+        return false unless val_match?(target_val, @object.send(att))
       end
       true
     end
 
-    def kv_match?(item, val)
-
-      return true if item == :any
-      return true if item.is_a?(Array) && item.include?(val)
-      #return item.include?(val) if item.is_a?(Array)
-      (item == val)
-    end
-
     def transition_match?(hash)
 
-      hash.each do |key, val|
-        return true if kv_match?(key, previous_value) && kv_match?(val, value)
+      hash.each do |startv, endv|
+        if val_match?(startv, previous_value) && val_match?(endv, value)
+          return true
+        end
       end
       false
     end
