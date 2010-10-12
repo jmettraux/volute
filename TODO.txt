@@ -36,3 +36,5 @@
 
 [ ] pass the object as block binding ?
 
+[ ] update gem.description and co
+

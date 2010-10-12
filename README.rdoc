@@ -8,7 +8,7 @@ It can be used to implement toy state machines, or dumb rule systems.
 
 == include Volute
 
-When the Volute mixin is included in a class, its attr_accessor call is modified so that the resulting attributer set method, upon setting the value of the attribute triggers a callback defined outside of the class.
+When the Volute mixin is included in a class, its attr_accessor call is modified so that the resulting attribute set method, upon setting the value of the attribute triggers a callback defined outside of the class.
 
   require 'rubygems'
   require 'volute' # gem install volute
@@ -30,7 +30,7 @@ When the Volute mixin is included in a class, its attr_accessor call is modified
   l.colour = :blue
   p l # => #<Light:0x10014c480 @changed_at=Fri Oct 08 20:01:52 +0900 2010, @colour=:blue>
 
-There is a catch in this example, the volute will trigger for any class that inccludes Volute and which sees a change to its :colour attribute.
+There is a catch in this example, the volute will trigger for any class that includes Volute and which sees a change to its :colour attribute.
 
 Those two classes would see their :colour hooked :
 
@@ -47,7 +47,7 @@ Those two classes would see their :colour hooked :
     attr_accessor :colour
   end
 
-To make sure that only instance of Light will be concerned, one could write :
+To make sure that only instances of Light will be affected, one could write :
 
   volute Light do
     volute :colour do
@@ -243,7 +243,7 @@ hairy isn't it ? There is a simpler way, it constitutes an exception to the "vol
     end
   end
 
-Our sore_throat and flu example could be rewritten with Ruby ifs as :
+Note that our sore_throat and flu example could be rewritten with Ruby ifs as :
 
   volute Patient do
     if object.sore_throat == true && object.flu == true
