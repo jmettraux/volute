@@ -2,7 +2,7 @@
 = volute - CHANGELOG.txt
 
 
-== volute - 0.1.1    not yet released
+== volute - 0.1.1    released 2010/10/12
 
 - volute :att => /regex/ and volute /regex/ => /regex/
 - volute :attribute => :any / :not_nil { ... }
