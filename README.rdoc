@@ -247,6 +247,14 @@ Our sore_throat and flu example could be rewritten with Ruby ifs as :
 
 which isn't hairy at all.
 
+Pointing to multiple values is OK :
+
+  volute Package do
+    volute :delivered => true, :weight => [ '1kg', '2kg' ] do
+      puts "delivered a package of 1 or 2 kg"
+    end
+  end
+
 There is an example that uses those 'state volutes' at http://github.com/jmettraux/volute/blob/master/examples/diagnosis.rb
 
 

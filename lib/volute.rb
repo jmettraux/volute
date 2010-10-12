@@ -252,7 +252,12 @@ module Volute
     def state_match?(args)
 
       args.first.each do |att, val|
-        return false if @object.send(att) != val
+        cval = @object.send(att)
+        if val.is_a?(Array)
+          return false if cval != val && ( ! val.include?(cval))
+        else
+          return false if cval != val
+        end
       end
       true
     end

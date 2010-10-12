@@ -32,11 +32,9 @@
 
 [ ] volute :att => /regex/ { ... }
 [ ] volute :att => :any { ... } (not a nil value)
-
-[ ] volute :att => [ a, b ] { ... } (a or b)
-
+[o] volute :att => [ a, b ] { ... } (a or b)
 [o] volute previous_value => [ val0, val1 ] { ... } (OR)
 [o] volute [ pval0, pval1 ] => value { ... } (OR)
 
-[ ] readme : list alternatives
+[ ] readme : list alternatives (aspects/hooks/callbacks)
 

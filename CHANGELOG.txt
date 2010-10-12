@@ -4,6 +4,7 @@
 
 == volute - 0.1.1    not yet released
 
+- volute :attribute => [ 'val0', 'val1'] { ... }
 - volute [ 'prev0', 'prev1' ] => 'current' { ... }
 - volute 'prev' => [ 'current0', 'current1' ] { ... }
 - 'state' volutes
