@@ -14,6 +14,8 @@
 [o] volute [ pval0, pval1 ] => value { ... } (OR)
 [o] volute :att => /regex/ { ... }
 [o] volute /regex/ => /regex/ { ... }
+[o] rewrite README head
+[o] readme : list alternatives (aspects/hooks/callbacks)
 
 [ ] volute Invoice do
       volute :paid do
@@ -33,6 +35,4 @@
       `-- volute a, b
 
 [ ] pass the object as block binding ?
-
-[ ] readme : list alternatives (aspects/hooks/callbacks)
 

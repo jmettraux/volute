@@ -1,7 +1,7 @@
 
 = volute
 
-It could be a 'set event bus', 'on_set callback system' or a 'business logic relocator'.
+I wanted to write something about the state of multiple objects, I ended with something that feels like a subset of aspect oriented programming.
 
 It can be used to implement toy state machines, or dumb rule systems.
 
@@ -350,6 +350,36 @@ TODO
 == examples
 
 http://github.com/jmettraux/volute/tree/master/examples/
+
+
+== alternatives
+
+states
+
+- there is a list of ruby state machines at the end of http://jmettraux.wordpress.com/2009/07/03/state-machine-workflow-engine/
+
+rules
+
+- http://github.com/codeaspects/ruleby
+- http://rools.rubyforge.org/
+- ...
+
+aspects
+
+- http://github.com/gcao/aspect4r
+- http://github.com/teejayvanslyke/gazer
+- http://github.com/nakajima/aspectory
+- http://github.com/matthewrudy/aspicious
+- http://aquarium.rubyforge.org/
+
+- http://github.com/search?type=Repositories&language=ruby&q=aspect&repo=&langOverride=&x=15&y=25&start_value=1 (github search)
+
+hooks and callbacks
+
+- http://github.com/apotonick/hooks
+- http://github.com/avdi/hookr
+- http://github.com/auser/backcall
+- ...
 
 
 == author
